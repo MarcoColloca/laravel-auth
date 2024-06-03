@@ -2,16 +2,65 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
+use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class ProjectSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    protected function fakeContributors(Faker $faker){
+
+        $contributors_number = rand(0, 5);
+        if($contributors_number === 0){
+            $contributors_list = null;
+        }else{
+
+            $contributors = [];
+    
+            for ($i=0; $i < $contributors_number ; $i++) { 
+                # code...
+                $contributors [] = $faker->url();
+            }
+    
+            $contributors_list = implode(', ', $contributors);
+    
+        }
+        
+        return [$contributors_number, $contributors_list];
+
+    }
+
+
+
+    public function run(Faker $faker): void
     {
-        //
+        
+        
+        
+        // Creazione di dati temporanei tramite Faker
+        for ($i=0; $i < 10 ; $i++) { 
+
+            list($contributors_number, $contributors_list) = $this->fakeContributors($faker);
+
+            # code...
+            $project = new Project();
+
+            $project->name = $faker->name();
+            $project->slug = Str::slug($project->name);
+            $project->link = $faker->url();
+            $project->description = $faker->optional()->text(500);;
+            $project->date_of_creation = $faker->dateTimeBetween('-1 year', 'now');
+            $project->is_public = $faker->randomElement([true, false]);
+            $project->contributors = $contributors_number;
+            $project->contributors_link = $contributors_list;
+
+            $project->save();
+            // dump($project);
+        }
     }
 }
