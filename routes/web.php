@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,7 @@ Route::middleware(['auth', 'verified'])
     })->name('dashboard');
 
     // Registrare tutte le altre rotte protette. Nel nostro caso aggiungeremo la CRUD sui POSTS
-    
+    Route::resource('projects', ProjectController::class);
 });
 
 
