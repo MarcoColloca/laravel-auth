@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date_of_creation');            
             $table->boolean('is_public')->default(true);
             $table->unsignedTinyInteger('contributors')->default(0);
-            $table->text('contributors_link')->nullable();
+            $table->text('contributors_name')->nullable();
             $table->timestamps();
         });
     }

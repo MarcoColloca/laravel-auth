@@ -24,7 +24,7 @@ class ProjectSeeder extends Seeder
     
             for ($i=0; $i < $contributors_number ; $i++) { 
                 # code...
-                $contributors [] = $faker->url();
+                $contributors [] = $faker->name();
             }
     
             $contributors_list = implode(', ', $contributors);
@@ -50,14 +50,14 @@ class ProjectSeeder extends Seeder
             # code...
             $project = new Project();
 
-            $project->name = $faker->name();
+            $project->name = $faker->sentence(3);
             $project->slug = Str::slug($project->name);
             $project->link = $faker->url();
             $project->description = $faker->optional()->text(500);;
             $project->date_of_creation = $faker->dateTimeBetween('-1 year', 'now');
             $project->is_public = $faker->randomElement([true, false]);
             $project->contributors = $contributors_number;
-            $project->contributors_link = $contributors_list;
+            $project->contributors_name = $contributors_list;
 
             $project->save();
             // dump($project);

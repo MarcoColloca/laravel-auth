@@ -21,14 +21,21 @@
                     value="{{ old('name') }}">
             </div>
             <div class="mb-3">
+                <label for="link" class="form-label fw-bold">Link</label>
+                <input type="text" class="form-control" id="link" name="link" placeholder="Insert your link's project"
+                    value="{{ old('link') }}">
+            </div>
+            <div class="mb-3">
                 <label for="date_of_creation" class="form-label fw-bold">Date of Creation</label>
                 <input type="date" class="form-control" id="date_of_creation" name="date_of_creation" placeholder="Insert date"
                     value="{{ old('date_of_creation') }}">
             </div>
             <div class="mb-3">
-                <label for="type" class="form-label fw-bold">Type</label>
-                <input type="text" class="form-control" id="type" name="type" placeholder="Public or Private"
-                    value="{{ old('type') }}">
+                <label for="floatingSelect">Type</label>
+                <select class="form-select" id="type" name="type" aria-label="Floating label select example">
+                    <option selected value="0">Public</option>
+                    <option value="1">Private</option>
+                </select>        
             </div>
             <div class="mb-3">
                 <label for="contributors" class="form-label fw-bold">Contributors</label>
@@ -36,9 +43,9 @@
                     value="{{ old('contributors') }}">
             </div>
             <div class="mb-3">
-                <label for="contributors_link" class="form-label fw-bold">Contributors Git Hub Links (Insert Contributors Git Hub Links, if any)</label>
-                <textarea class="form-control" id="contributors_link" name="contributors_link"
-                    placeholder="https://github.com/Contributor, https://github.com/Contributor, https://github.com/Contributor">{{old('contributors_link')}}
+                <label for="contributors_name" class="form-label fw-bold">Contributors Names (if any)</label>
+                <textarea class="form-control" id="contributors_name" name="contributors_name"
+                    placeholder="Contributor, Contributor, Contributor">{{old('contributors_name')}}
                 </textarea>
             </div>
             <div class="mb-3">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -31,7 +32,36 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //VALIDATION
+        $request->validate([
+            "name"=> "required|max:200",
+            "link"=> "required|max:2000|url",
+            "date_of_creation"=> "required|date",
+            "type"=> "required|integer|numeric",
+            "contributors"=> "required|integer|numeric",
+            "contributors_name"=> "nullable|max:2000",
+            "description"=> "nullable|max:2000",
+        ]);
+
+
+        $form_data = $request->all();
+
+        $new_project = new Project();
+
+        $new_project->name = $form_data['name'];
+        $new_project->link = $form_data['link'];
+        $new_project->date_of_creation = $form_data['date_of_creation'];        
+        $new_project->is_public = $request->input('type');        
+        $new_project->contributors = $form_data['contributors'];
+        $new_project->contributors_name = $form_data['contributors_name'];
+        $new_project->description = $form_data['description'];
+        $new_project->slug = Str::slug($new_project->name);
+
+        //dd($new_project);
+
+        $new_project->save();
+
+        return to_route("admin.projects.index");
     }
 
     /**
