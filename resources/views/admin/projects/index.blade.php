@@ -5,8 +5,10 @@
     <section class="mb-5 py-5 bg-purple">
         <div class="bg-light container py-4 projects-cotnainer">
 
-            <h1 class="my-4 text-center"> My Projects</h1>
-            <a class="btn btn-dark mb-5" href="{{route('admin.projects.create')}}">Aggiungi Progetto</a>
+            <h1 class="my-4 text-center text-danger"> My Projects</h1>
+            <div class="text-end me-3">
+                <a class="btn btn-dark mb-5" href="{{route('admin.projects.create')}}">Aggiungi Progetto</a>
+            </div>
 
             <table class="table table-dark table-stripped table-bordered">
                 <thead>
