@@ -22,14 +22,30 @@
                 </thead>
                 <tbody>
                     @foreach ($projects as $project)                
-                        <tr>
+                        <tr class="position-relative">
                             <td>{{$project->name}}</td>
                             <td>{{$project->date_of_creation}}</td>
                             <td>{{$project->is_public === 0 ? 'Public' : 'Private'}}</td>
                             <td>{{$project->contributors}}</td>
                             <td><a class="text-success" href="{{route('admin.projects.show', $project)}}">Show Info</a></td>
                             <td><a class="text-primary" href="{{route('admin.projects.edit', $project)}}">Edit</a></td>
-                            <td><a class="text-danger text-center" href="">X</a></td>
+                            <td class="text-center">
+                                <form class="item-delete-form" action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+    
+                                    <button class="btn link-danger">X</button>
+    
+                                    <div class="my-modal">
+                                        <div class="my-modal__box">
+                                            <h5 class="text-center me-5">Do you really want to delete this Project?!</h5>
+                                            <span class="link link-danger my-modal-yes mx-5">Yes</span>
+                                            <span class="link link-success my-modal-no">No</span>
+                                        </div>
+                                    </div>
+    
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
