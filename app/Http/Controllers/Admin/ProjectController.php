@@ -34,13 +34,13 @@ class ProjectController extends Controller
     {
         //VALIDATION
         $request->validate([
-            "name"=> "required|max:200",
-            "link"=> "required|max:2000|url",
-            "date_of_creation"=> "required|date",
-            "type"=> "required|integer|numeric",
-            "contributors"=> "required|integer|numeric",
-            "contributors_name"=> "nullable|max:2000",
-            "description"=> "nullable|max:2000",
+            'name'=> 'required|max:200',
+            'link'=> 'required|max:2000|url',
+            'date_of_creation'=> 'required|date',
+            'type'=> 'required|integer|numeric',
+            'contributors'=> 'required|integer|numeric',
+            'contributors_name'=> 'nullable|max:2000',
+            'description'=> 'nullable|max:2000',
         ]);
 
 
@@ -87,7 +87,25 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        dd($request->all());
+        //VALIDATION
+        $request->validate([
+            'name'=> 'required|max:200',
+            'link'=> 'required|max:2000|url',
+            'date_of_creation'=> 'required|date',
+            'type'=> 'required|integer|numeric',
+            'contributors'=> 'required|integer|numeric',
+            'contributors_name'=> 'nullable|max:2000',
+            'description'=> 'nullable|max:2000',
+        ]);
+        
+        $form_data = $request->all();
+
+        $project->fill($form_data);
+        $project->slug = Str::slug($project->name);
+
+        $project->save();
+
+        return to_route('admin.projects.show', $project);
     }
 
     /**
