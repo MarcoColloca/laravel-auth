@@ -1,1 +1,6 @@
-@import '~bootstrap/scss/bootstrap'
+@use 'partials/reset';
+@use 'partials/common.scss';
+@use 'partials/utilities.scss';
+
+
+@import '~bootstrap/scss/bootstrap';
