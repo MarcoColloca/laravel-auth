@@ -28,7 +28,7 @@
                             <td>{{$project->is_public === 0 ? 'Public' : 'Private'}}</td>
                             <td>{{$project->contributors}}</td>
                             <td><a class="text-success" href="{{route('admin.projects.show', $project)}}">Show Info</a></td>
-                            <td><a class="text-primary" href="">Edit</a></td>
+                            <td><a class="text-primary" href="{{route('admin.projects.edit', $project)}}">Edit</a></td>
                             <td><a class="text-danger text-center" href="">X</a></td>
                         </tr>
                     @endforeach
