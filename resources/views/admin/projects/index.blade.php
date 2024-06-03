@@ -6,6 +6,7 @@
         <div class="bg-light container py-4 projects-cotnainer">
 
             <h1 class="my-4 text-center"> My Projects</h1>
+            <a class="btn btn-dark mb-5" href="{{route('admin.projects.create')}}">Aggiungi Progetto</a>
 
             <table class="table table-dark table-stripped table-bordered">
                 <thead>
