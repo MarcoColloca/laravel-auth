@@ -7,3 +7,13 @@ main{
 
     max-width: 400px;
 }
+
+#app{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex-grow: 1;
+}
