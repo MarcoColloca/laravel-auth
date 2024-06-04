@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
@@ -77,20 +78,12 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //VALIDATION
-        $request->validate([
-            'name'=> 'required|max:200',
-            'link'=> 'required|max:2000|url',
-            'date_of_creation'=> 'required|date',
-            'type'=> 'required|integer|numeric',
-            'contributors'=> 'required|integer|numeric',
-            'contributors_name'=> 'nullable|max:2000',
-            'description'=> 'nullable|max:2000',
-        ]);
+        //VALIDATION in UpdateProjectRequest
+
         
-        $form_data = $request->all();
+        $form_data = $request->validated();
 
         $project->fill($form_data);
         $project->slug = Str::slug($project->name);
