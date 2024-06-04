@@ -11,6 +11,28 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    protected function getUniqueSlug($name){
+
+        $base_slug = Str::slug($name);
+        $slug = $base_slug;
+        $n = 0;
+        
+        do{
+
+            $find = Project::where('slug', $slug)->first(); // null | Project
+
+            if ($find !== null) {
+                $n++;
+                $slug = $base_slug . '-' .$n;
+            }
+
+        }while($find !== null);
+
+
+        return $slug;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -48,7 +70,7 @@ class ProjectController extends Controller
         $new_project->contributors = $form_data['contributors'];
         $new_project->contributors_name = $form_data['contributors_name'];
         $new_project->description = $form_data['description'];
-        $new_project->slug = Str::slug($new_project->name);
+        $new_project->slug = $this->getUniqueSlug($new_project->name);
 
         //dd($new_project);
 
@@ -86,7 +108,7 @@ class ProjectController extends Controller
         $form_data = $request->validated();
 
         $project->fill($form_data);
-        $project->slug = Str::slug($project->name);
+        $project->slug = $this->getUniqueSlug($project->name);
 
         $project->save();
 

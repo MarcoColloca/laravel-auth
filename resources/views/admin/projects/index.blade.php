@@ -14,6 +14,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
+                        <th scope="col">Slug</th>
                         <th scope="col">Date of Creation</th>
                         <th scope="col">Type of Project</th>
                         <th scope="col">Contributors</th>
@@ -26,6 +27,7 @@
                     @foreach ($projects as $project)                
                         <tr class="position-relative">
                             <td>{{$project->name}}</td>
+                            <td>{{$project->slug}}</td>
                             <td>{{$project->date_of_creation}}</td>
                             <td>{{$project->is_public === 0 ? 'Public' : 'Private'}}</td>
                             <td class="text-center">{{$project->contributors}}</td>
