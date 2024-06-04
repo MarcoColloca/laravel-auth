@@ -10,7 +10,7 @@
                 <a class="btn btn-dark mb-5" href="{{route('admin.projects.create')}}">Aggiungi Progetto</a>
             </div>
 
-            <table class="table table-dark table-stripped table-bordered">
+            <table class="table table-dark table-hover table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -28,7 +28,7 @@
                             <td>{{$project->name}}</td>
                             <td>{{$project->date_of_creation}}</td>
                             <td>{{$project->is_public === 0 ? 'Public' : 'Private'}}</td>
-                            <td>{{$project->contributors}}</td>
+                            <td class="text-center">{{$project->contributors}}</td>
                             <td><a class="text-success" href="{{route('admin.projects.show', $project)}}">Show Info</a></td>
                             <td><a class="text-primary" href="{{route('admin.projects.edit', $project)}}">Edit</a></td>
                             <td class="text-center">
