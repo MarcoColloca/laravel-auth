@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreProjectRequest;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
@@ -30,21 +31,12 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //VALIDATION
-        $request->validate([
-            'name'=> 'required|max:200',
-            'link'=> 'required|max:2000|url',
-            'date_of_creation'=> 'required|date',
-            'type'=> 'required|integer|numeric',
-            'contributors'=> 'required|integer|numeric',
-            'contributors_name'=> 'nullable|max:2000',
-            'description'=> 'nullable|max:2000',
-        ]);
+        // VALIDATION in StoreProjectRequest
 
 
-        $form_data = $request->all();
+        $form_data = $request->validated();
 
         $new_project = new Project();
 
